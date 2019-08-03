@@ -1,0 +1,15 @@
+<%= form_for @agency do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.fields_for :agency_categories, @list_agency_categories do |ff| %>
+    <%= ff.check_box :_destroy, {checked: ff.object.id.present? || ff.object.category_id.in?(@categories_checked)}, 0, 1 %>
+    <%= ff.label :category_id, ff.object.category.name %>
+    <%= ff.hidden_field :category_id %>
+    <%= ff.text_field :other %>
+    <br>
+  <% end %>
+  <br>
+
+  <%= f.submit "Submit" %>
+<% end %>
